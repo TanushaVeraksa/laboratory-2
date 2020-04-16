@@ -23,34 +23,56 @@ namespace lab2
              Console.WriteLine("Шифрованный алфавит: " + caesar.getNewAlpha());
              Console.WriteLine();
 
-
-
              Console.WriteLine(@"Чтение из файла E:\SomeDir\text.txt");
              string openMessage = caesar.ReadFile();
 
              string close = "";
 
+            var startTimeforEcpryptCaesar = DateTime.Now;
+
              close = caesar.encrypt(openMessage);
-             Console.WriteLine("Запись в файл {0} зашифрованный текст", caesar.pathEncrypt);
+
+            Console.WriteLine($"\nEncription time caesar {DateTime.Now - startTimeforEcpryptCaesar}");
+
+
+             Console.WriteLine("\nЗапись в файл {0} зашифрованный текст", caesar.pathEncrypt);
              caesar.WriteFile(close, caesar.pathEncrypt);
-             openMessage = caesar.decrypt(close);
+
+
+            var startTimeforDecpryptCaesar = DateTime.Now;
+            openMessage = caesar.decrypt(close);
+             Console.WriteLine($"\nDecription time caesar {DateTime.Now - startTimeforEcpryptCaesar}");
+
              Console.WriteLine();
-             Console.WriteLine("Запись в файл {0} расшифрованный текст", caesar.pathDecrypt);
+             Console.WriteLine("\nЗапись в файл {0} расшифрованный текст", caesar.pathDecrypt);
              caesar.WriteFile(openMessage, caesar.pathDecrypt);
              Console.ReadKey();
 
             // 2
             Trisemus trisemus = new Trisemus();
             Console.WriteLine(@"Чтение из файла E:\SomeDir\text.txt");
-            string openMessageTrisemus = trisemus.ReadFile();
+            Console.WriteLine();
 
+           string openMessageTrisemus = trisemus.ReadFile();
+
+            var startTimeforEncpryptTrisemus = DateTime.Now;
+
+            openMessage = caesar.decrypt(close);
+            
             string encryptText = trisemus.createTableAndDecryptText(openMessage);
-           
+
+            Console.WriteLine($"\nEncription time trisemus {DateTime.Now - startTimeforEncpryptTrisemus}");
+            Console.WriteLine();
+
+            var startTimeforDecpryptTrisemus = DateTime.Now;
 
             Console.WriteLine(@"Запись зашифрованного текста в файл E:\SomeDir\encryptTrisemus.txt");
             trisemus.WriteFile(encryptText, @"E:\SomeDir\encryptTrisemus.txt");
 
-            Console.WriteLine(@"Запись в файл E:\SomeDir\decryptTrisemus.txt расшифрованный текст");
+            Console.WriteLine($"\nDecription time trisemus {DateTime.Now - startTimeforDecpryptTrisemus}");
+            Console.WriteLine();
+
+           Console.WriteLine(@"Запись в файл E:\SomeDir\decryptTrisemus.txt расшифрованный текст");
             trisemus.WriteFile(openMessageTrisemus, @"E:\SomeDir\decryptTrisemus.txt");
 
 
